@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using DAL.Interfaces;
+using DAL.Entities;
 
 namespace DAL
 {
-    public class Repository<TEntity>: IRepository<TEntity> where TEntity : DAL.Entities.Entity
+    public class Repository<TEntity>: IRepository<TEntity> where TEntity : Entity
     {
         private DbContext _dbContext;
         private DbSet<TEntity> _dbSet;

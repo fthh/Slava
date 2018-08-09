@@ -32,7 +32,7 @@ namespace BLL
 
         public ICollection<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _unitOfWork.GetRepository<T>().GetAll().ToList();
         }
 
         public T GetById(Guid id)

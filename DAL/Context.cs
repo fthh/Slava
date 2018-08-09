@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using DAL.Entities;
 
 namespace DAL
 {
@@ -13,7 +14,7 @@ namespace DAL
         {
         }
 
-        public DbSet<DAL.Entities.Post> Posts { get; set; }
-        public DbSet<DAL.Entities.User> Users { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

@@ -14,7 +14,6 @@ namespace ConsoleApp1
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule(new BLL.ServiceModule());
-            //builder.RegisterModule(new DAL.RepositoryModule());
 
             var container = builder.Build();
 
