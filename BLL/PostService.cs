@@ -23,7 +23,7 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public void newPost(Post entity, User author)
+        public void NewPost(Post entity, User author)
         {
             throw new NotImplementedException();
         }

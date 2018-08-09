@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Autofac;
+using BLL;
 
 namespace WpfApp2
 {
@@ -21,11 +22,21 @@ namespace WpfApp2
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        public static IContainer AutofacContainer { get; set; }
+
         public MainWindow()
         {
+            AutofacContainer = ConfigureContainer();
 
             InitializeComponent();
         }
+
+        private static IContainer ConfigureContainer()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule(new BLL.ServiceModule());
+            return builder.Build();
+        }
+
     }
 }

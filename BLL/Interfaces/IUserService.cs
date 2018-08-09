@@ -8,7 +8,6 @@ namespace BLL.Interfaces
 {
     public interface IUserService : IServiceBase<DAL.Entities.User>
     {
-        void RegisterUser(DAL.Entities.User entity);
-        DAL.Entities.User GetUserById(Guid Id);
+
     }
 }

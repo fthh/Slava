@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL;
-using DAL;
+using Autofac;
 
 namespace ConsoleApp1
 {
@@ -12,17 +12,25 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            /*
-            var qq = new DAL.Context();
-            qq.Users.Add(new DTO.User()
+            var builder = new ContainerBuilder();
+            builder.RegisterModule(new BLL.ServiceModule());
+            //builder.RegisterModule(new DAL.RepositoryModule());
+
+            var container = builder.Build();
+
+            using (var scope = container.BeginLifetimeScope())
             {
-                UserId = Guid.NewGuid(),
-                Login = "foo",
-                Pasword = "52531"
-            });
-            qq.SaveChanges();
-            */
-            
+                var userServ = scope.Resolve<BLL.Interfaces.IUserService>();
+
+                var newUser = new DAL.Entities.User()
+                {
+                    Login = "foo",
+                    Pasword = "52531"
+                };
+
+                userServ.Create(newUser);
+
+            }
         }
     }
 }
