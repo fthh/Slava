@@ -15,7 +15,6 @@ namespace BLL
         public PostService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-
         }
     }
 }
