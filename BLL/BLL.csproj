@@ -43,7 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IPostService.cs" />
+    <Compile Include="Interfaces\IServiceBase.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="PostService.cs" />
+    <Compile Include="ServiceBase.cs" />
+    <Compile Include="ServiceModule.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
