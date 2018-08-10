@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Entities;
 
 namespace BLL.Interfaces
 {
-    public interface IServiceBase<T> where T : DAL.Entities.Entity
+    public interface IServiceBase<T> where T : Entity
     {
         void Create(T entity);
         T GetById(Guid id);

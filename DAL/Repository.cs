@@ -29,12 +29,23 @@ namespace DAL
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            var dbEntityEntry = _dbContext.Entry(entity);
+            if (dbEntityEntry.State != EntityState.Deleted)
+            {
+                dbEntityEntry.State = EntityState.Deleted;
+            }
+            else
+            {
+                _dbSet.Attach(entity);
+                _dbSet.Remove(entity);
+            }
         }
 
-        public void Delete(Guid entity)
+        public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = _dbSet.Find(id);
+            if (entity != null)
+                Delete(entity);
         }
 
         public IQueryable<TEntity> GetAll()
@@ -49,7 +60,8 @@ namespace DAL
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            var dbEntityEntry = _dbContext.Entry(entity);
+            dbEntityEntry.State = EntityState.Modified;
         }
     }
 }

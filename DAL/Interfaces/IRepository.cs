@@ -11,7 +11,7 @@ namespace DAL.Interfaces
         IQueryable<TEntity> GetAll();
         Guid Add(TEntity entity);
         void Delete(TEntity entity);
-        void Delete(Guid entity);
+        void Delete(Guid id);
         void Update(TEntity entity);
         TEntity GetById(Guid id);
     }

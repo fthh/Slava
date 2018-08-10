@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="Context.cs" />
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\Post.cs" />
+    <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using BLL.Interfaces;
+using DAL;
 
 namespace BLL
 {
@@ -11,11 +13,11 @@ namespace BLL
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterModule(new DAL.RepositoryModule());
+            builder.RegisterModule(new RepositoryModule());
             builder.RegisterGeneric(typeof(ServiceBase<>)).AsSelf();
 
-            builder.RegisterType<PostService>().As<BLL.Interfaces.IPostService>().InstancePerLifetimeScope();
-            builder.RegisterType<UserService>().As<BLL.Interfaces.IUserService>().InstancePerLifetimeScope();
+            builder.RegisterType<ProjectService>().As<IProjectService>().InstancePerLifetimeScope();
+            builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

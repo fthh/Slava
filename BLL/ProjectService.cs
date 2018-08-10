@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
 using DAL.Interfaces;
 using Autofac;
 using DAL.Entities;
@@ -11,36 +10,36 @@ using BLL.Interfaces;
 
 namespace BLL
 {
-    public class UserService : ServiceBase<User>, IUserService
+    public class ProjectService : ServiceBase<Project>, IProjectService
     {
         private IUnitOfWork _unitOfWork;
 
-        public UserService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public ProjectService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public void DeleteUser(User entity)
+        public void DeleteProject(Project entity)
         {
             base.Delete(entity);
         }
 
-        public void DeleteUser(Guid id)
+        public void DeleteProject(Guid id)
         {
             base.Delete(id);
         }
 
-        public User GetPostById(Guid id)
+        public Project GetProjectById(Guid id)
         {
             return base.GetById(id);
         }
 
-        public void NewUser(User entity)
+        public void NewProject(Project entity)
         {
             base.Create(entity);
         }
 
-        public void UpdateUser(User entity)
+        public void UpdateProject(Project entity)
         {
             base.Update(entity);
         }

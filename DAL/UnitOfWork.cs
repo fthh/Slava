@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Interfaces;
+using DAL.Entities;
 
 namespace DAL
 {
@@ -21,7 +22,7 @@ namespace DAL
             return _context.SaveChanges();
         }
 
-        public IRepository<T> GetRepository<T>() where T : DAL.Entities.Entity
+        public IRepository<T> GetRepository<T>() where T : Entity
         {
             var repo = (IRepository<T>)_repositories.SingleOrDefault(r => r is IRepository<T>);
             if (repo == null)

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Interfaces;
+using DAL.Entities;
+using BLL.Interfaces;
 
 namespace BLL
 {
-    public class ServiceBase<T> : BLL.Interfaces.IServiceBase<T> where T : DAL.Entities.Entity
+    public class ServiceBase<T> : IServiceBase<T> where T : Entity
     {
         private IUnitOfWork _unitOfWork;
 
@@ -23,11 +25,15 @@ namespace BLL
         }
 
         public void Delete(T entity)
-        { 
+        {
+            _unitOfWork.GetRepository<T>().Delete(entity);
+            _unitOfWork.Commit();
         }
 
         public void Delete(Guid id)
         {
+            _unitOfWork.GetRepository<T>().Delete(id);
+            _unitOfWork.Commit();
         }
 
         public ICollection<T> GetAll()
@@ -37,11 +43,13 @@ namespace BLL
 
         public T GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _unitOfWork.GetRepository<T>().GetById(id);
         }
 
         public void Update(T entity)
         {
+            _unitOfWork.GetRepository<T>().Update(entity);
+            _unitOfWork.Commit();
         }
     }
 }

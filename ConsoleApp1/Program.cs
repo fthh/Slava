@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL;
 using Autofac;
+using BLL.Interfaces;
+using DAL.Entities;
 
 namespace ConsoleApp1
 {
@@ -13,15 +15,15 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule(new BLL.ServiceModule());
+            builder.RegisterModule(new ServiceModule());
 
             var container = builder.Build();
 
             using (var scope = container.BeginLifetimeScope())
             {
-                var userServ = scope.Resolve<BLL.Interfaces.IUserService>();
+                var userServ = scope.Resolve<IUserService>();
 
-                var newUser = new DAL.Entities.User()
+                var newUser = new User()
                 {
                     Login = "foo",
                     Pasword = "52531"
