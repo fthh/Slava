@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var user = (DTO.User)ViewData["user"];
+}
+
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+        <h2>User:</h2>
+        <form method="post">
+            <p>
+                First name: 
+                <input type="text" name="FirstName" value="@Html.Raw(user.FirstName)"/>
+            </p>
+            <p>
+                Last name:
+                <input type="text" name="LastName" value="@Html.Raw(user.LastName)" />
+            </p>
+            <p>
+                Middle name:
+                <input type="text" name="MiddleName" value="@Html.Raw(user.MiddleName)" />
+            </p>
+            <p>
+                Email:
+                <input type="text" name="Email" value="@Html.Raw(user.Email)" />
+            </p>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <h2>Projects:</h2>
+        @Html.Hidden("projectId", "")
+        <input type="text" name="referal" placeholder="" value="" class="who" autocomplete="off">
+        <a href="#" id="pickAnother" style="display: none;">Change</a>
+        <ul class="search_result"></ul>
+        @{
+            foreach (var project in user.Projects)
+            {
+                var link = "/Home/DeleteProjectUser/?idProject=" + project.Id + "&idUser=" + user.Id;
+                <p><a class="btn btn-default" href="@link">@project.Title</a></p>
+
+            }
+        }
+    </div>
+    <div class="col-md-2"></div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/autoUser")
+}

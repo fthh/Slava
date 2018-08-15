@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Entities;
+using DTO;
 
 namespace BLL.Interfaces
 {
@@ -14,5 +14,7 @@ namespace BLL.Interfaces
         void DeleteProject(Project entity);
         void DeleteProject(Guid id);
         Project GetProjectById(Guid id);
+        void DeleteUserFromProjects(Guid idProject, Guid idUser);
+        void AddUserToProject(Project project, User user);
     }
 }

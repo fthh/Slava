@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var project = (DTO.Project)ViewData["project"];
+}
+
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <form method="post">
+        <div class="col-md-3">
+            @Html.Raw("<a href=\"/Home/ProjectEdit/?id=" + project.Id + "\"> Edit </a>")
+            @Html.Raw("<a href=\"/Home/ProjectDelete/?id=" + project.Id + "\"> Delete </a>")
+
+            <h2>Project:</h2>
+
+            <p>
+                Project name:
+                <input type="text" name="Title" value="@Html.Raw(project.Title)" />
+            </p>
+
+            <p>
+                Priority:
+                <input type="text" name="Priority" value="@Html.Raw(project.Priority)" />
+            </p>
+            <!--
+            <p>Date:
+                <input type="text" name="FirstName" value="@Html.Raw(project.CreatedAt)" />
+                <input type="text" name="FirstName" value="@Html.Raw(project.CompletedAt)" /></p>-->
+            <p>
+                Text:
+            <p>
+                <input type="text" name="Text" value="@Html.Raw(project.Text)" />
+            </p>
+            <p>
+                Performer:
+                <input type="text" name="Performer" value="@Html.Raw(project.Performer)" />
+            </p>
+            <p>
+                Customer:
+                <input type="text" name="Customer" value="@Html.Raw(project.Customer)" />
+            </p>
+            <button type="submit">Save</button>
+
+        </div>
+        <div class="col-md-4">
+            <h2>Workers:</h2>
+            @{
+                var namePM = project.ProjectManager.FirstName + " " + project.ProjectManager.LastName;
+            }
+            <p>Project manager:@namePM</p>
+
+            <label class="col-2 col-form-label">Add user:</label>
+            @Html.Hidden("userId", "")
+            <input type="text" name="referal" placeholder="" value="" class="who" autocomplete="off">
+            <a href="#" id="pickAnother" style="display: none;">Change</a>
+            @Html.Hidden("projectId", project.Id)
+            @{
+                //var link1 = "/Home/AddProjectUser/?idProject=" + project.Id + "&idUser=" + ; 
+            }
+            <a href="#" onclick="return theFunction();">Add</a>
+            <script type="text/javascript">
+                function theFunction() {
+                    var p_id = document.getElementById("projectId").value;
+                    var u_id = document.getElementById("userId").value;
+                    document.location.href = "/Home/AddProjectUser/?idProject=" + p_id + "&idUser=" + u_id;
+                    return true //or false, depending on whether you want to allow the `href` property to follow through or not
+                }
+            </script>
+            <ul class="search_result"></ul>
+
+            @{
+                foreach (var worker in project.Workers)
+                {
+                    var name = worker.FirstName + " " + worker.LastName;
+                    var link = "/Home/DeleteProjectUser/?idProject=" + project.Id + "&idUser=" + worker.Id;
+                    <p><a class="btn btn-default" href="@link">@name</a></p>
+                }
+            }
+        </div>
+    </form>
+    <div class="col-md-2"></div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/autoUser")
+}

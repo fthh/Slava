@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BLL;
 using Autofac;
 using BLL.Interfaces;
-using DAL.Entities;
+using DTO;
 
 namespace ConsoleApp1
 {
@@ -18,6 +18,8 @@ namespace ConsoleApp1
             builder.RegisterModule(new ServiceModule());
 
             var container = builder.Build();
+
+
 
             using (var scope = container.BeginLifetimeScope())
             {

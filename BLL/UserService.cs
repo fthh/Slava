@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
 using DAL.Interfaces;
-using Autofac;
-using DAL.Entities;
+using DTO;
 using BLL.Interfaces;
 
 namespace BLL

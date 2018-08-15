@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using DAL.Interfaces;
-using DAL.Entities;
+using DTO;
 
 namespace DAL
 {

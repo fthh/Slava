@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using System.Data.Entity;
+using DAL.Interfaces;
 
 namespace DAL
 {
@@ -14,7 +15,7 @@ namespace DAL
         {
             builder.RegisterGeneric(typeof(Repository<>));
             builder.RegisterType<Context>().AsSelf().As<DbContext>();
-            builder.RegisterType<UnitOfWork>().As<DAL.Interfaces.IUnitOfWork>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
             base.Load(builder);
         }
     }

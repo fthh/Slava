@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Interfaces;
 using Autofac;
-using DAL.Entities;
+using DTO;
 using BLL.Interfaces;
 
 namespace BLL
@@ -29,6 +29,21 @@ namespace BLL
             base.Delete(id);
         }
 
+        public void DeleteUserFromProjects(Guid idProject, Guid idUser)
+        {
+            var project = GetById(idProject);
+            var user = project.Workers.FirstOrDefault(c => c.Id == idUser);
+            project.Workers.Remove(user);
+            _unitOfWork.Commit();
+        }
+
+        public void AddUserToProject(Project project, User user)
+        {
+            project.Workers.Add(user);
+            user.Projects.Add(project);
+            _unitOfWork.Commit();
+        }
+
         public Project GetProjectById(Guid id)
         {
             return base.GetById(id);
@@ -43,5 +58,6 @@ namespace BLL
         {
             base.Update(entity);
         }
+
     }
 }
