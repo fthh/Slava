@@ -21,8 +21,12 @@
     <div class="col-md-4">
         <h2>Workers:</h2>
         @{
-            var namePM = project.ProjectManager.FirstName + " " + project.ProjectManager.LastName;
-         }
+            var namePM = "";
+            if (project.ProjectManager != null)
+            {
+                namePM = project.ProjectManager.FirstName + " " + project.ProjectManager.LastName;
+            }
+        }
         <p>Project manager:@Html.Raw(namePM)</p>
         <p>Workers:</p>
         @{

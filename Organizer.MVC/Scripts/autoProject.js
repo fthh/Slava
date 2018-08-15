@@ -30,7 +30,7 @@ $(function () {
             selectedPM = $(this).text();
             $(".who").val(selectedPM).attr('disabled', 'disabled');
             $("#pickAnother").fadeIn();
-            $("#projectId").val(parseInt(selectedPM.split(' ')[1]));
+            $("#projectId").val(selectedPM.split(' ')[1]);
             $(".search_result").fadeOut();
         });
 })

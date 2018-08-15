@@ -63,5 +63,16 @@ namespace BLL
             base.Update(entity);
         }
 
+        public void AddProjectManager(Guid projectId, Guid userId)
+        {
+            var projectRepository = _unitOfWork.GetRepository<Project>();
+            var userRepository = _unitOfWork.GetRepository<User>();
+            var project = projectRepository.GetById(projectId);
+            var user = userRepository.GetById(userId);
+            //project.Workers.Add(user);
+            project.ProjectManager = user;
+            projectRepository.Update(project);
+            _unitOfWork.Commit();
+        }
     }
 }

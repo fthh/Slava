@@ -18,6 +18,8 @@ namespace Organizer.MVC
 
             bundles.Add(new ScriptBundle("~/bundles/autoUser").Include(
                       "~/Scripts/autoUser.js"));
+            bundles.Add(new ScriptBundle("~/bundles/autoUserPM").Include(
+                      "~/Scripts/autoUserPM.js"));
             bundles.Add(new ScriptBundle("~/bundles/autoProject").Include(
                       "~/Scripts/autoProject.js"));
 

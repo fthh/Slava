@@ -22,10 +22,11 @@
                 Priority:
                 <input type="text" name="Priority" value="@Html.Raw(project.Priority)" />
             </p>
-            <!--
-            <p>Date:
-                <input type="text" name="FirstName" value="@Html.Raw(project.CreatedAt)" />
-                <input type="text" name="FirstName" value="@Html.Raw(project.CompletedAt)" /></p>-->
+            <p>
+                Date:
+                <input class="form-control" type="date" value="@project.CreatedAt.Date.ToString("yyyy-MM-dd")" name="CreatedAt">
+                <input class="form-control" type="date" value="@project.CompletedAt.Date.ToString("yyyy-MM-dd")" name="CompletedAt">
+            </p>
             <p>
                 Text:
             <p>
@@ -39,35 +40,55 @@
                 Customer:
                 <input type="text" name="Customer" value="@Html.Raw(project.Customer)" />
             </p>
+            
             <button type="submit">Save</button>
 
         </div>
         <div class="col-md-4">
-            <h2>Workers:</h2>
-            @{
-                var namePM = project.ProjectManager.FirstName + " " + project.ProjectManager.LastName;
-            }
-            <p>Project manager:@namePM</p>
-
-            <label class="col-2 col-form-label">Add user:</label>
-            @Html.Hidden("userId", "")
-            <input type="text" name="referal" placeholder="" value="" class="who" autocomplete="off">
-            <a href="#" id="pickAnother" style="display: none;">Change</a>
-            @Html.Hidden("projectId", project.Id)
-            @{
-                //var link1 = "/Home/AddProjectUser/?idProject=" + project.Id + "&idUser=" + ; 
-            }
-            <a href="#" onclick="return theFunction();">Add</a>
-            <script type="text/javascript">
-                function theFunction() {
-                    var p_id = document.getElementById("projectId").value;
-                    var u_id = document.getElementById("userId").value;
-                    document.location.href = "/Home/AddProjectUser/?idProject=" + p_id + "&idUser=" + u_id;
-                    return true //or false, depending on whether you want to allow the `href` property to follow through or not
+            <div>
+                @{
+                    var namePM = "";
+                    if (project.ProjectManager != null)
+                    {
+                        namePM = project.ProjectManager.FirstName + " " + project.ProjectManager.LastName;
+                    }
                 }
-            </script>
-            <ul class="search_result"></ul>
-
+                <h2>Project manager:</h2>
+                <p>@namePM</p>
+                @Html.Hidden("projectId", project.Id)
+                @Html.Hidden("ProjectManager", "")
+                <input type="text" name="referal" placeholder="" value="" class="pm" autocomplete="off">
+                <a href="#" id="pickAnotherPM" style="display: none;">Change</a>
+                <a href="#" onclick="return theFunction1();">Add</a>
+                <script type="text/javascript">
+                    function theFunction1() {
+                        var p_id = document.getElementById("projectId").value;
+                        var u_id = document.getElementById("ProjectManager").value;
+                        document.location.href = "/Home/AddProjectPM/?idProject=" + p_id + "&idPm=" + u_id;
+                    }
+                </script>
+                <ul class="search_resultPM"></ul>
+            </div>
+            <h2>Workers:</h2>
+            <div>
+                <label class="col-2 col-form-label">Add user:</label>
+                @Html.Hidden("userId", "")
+                <input type="text" name="referal" placeholder="" value="" class="who" autocomplete="off">
+                <a href="#" id="pickAnother" style="display: none;">Change</a>
+                @Html.Hidden("projectId", project.Id)
+                @{
+                    //var link1 = "/Home/AddProjectUser/?idProject=" + project.Id + "&idUser=" + ; 
+                }
+                <a href="#" onclick="return theFunction();">Add</a>
+                <script type="text/javascript">
+                    function theFunction() {
+                        var p_id = document.getElementById("projectId").value;
+                        var u_id = document.getElementById("userId").value;
+                        document.location.href = "/Home/AddProjectUser/?idProject=" + p_id + "&idUser=" + u_id;
+                    }
+                </script>
+                <ul class="search_result"></ul>
+            </div>
             @{
                 foreach (var worker in project.Workers)
                 {
@@ -82,4 +103,5 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/autoUser")
+    @Scripts.Render("~/bundles/autoUserPM")
 }

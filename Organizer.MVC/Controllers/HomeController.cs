@@ -28,13 +28,11 @@ namespace Organizer.MVC.Controllers
             var users = _userService
                 .GetAll()
                 .OrderBy(x => x.FirstName)
-                .Take(50)
                 .ToList();
 
             var projects = _projectService
                 .GetAll()
                 .OrderBy(x => x.Priority)
-                .Take(50)
                 .ToList();
 
             ViewData["users"] = users;
@@ -114,8 +112,9 @@ namespace Organizer.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProjectEdit(Guid id, [Bind(Include = "Title,Priority,Text,Performer,Customer")] Project project)
+        public ActionResult ProjectEdit(Guid id, [Bind(Include = "Title,Priority,Text,Performer,Customer,CreatedAt,CompletedAt")] Project project)
         {
+            
             var projectById = _projectService.GetById(id);
             projectById.Title = project.Title;
             projectById.Priority = project.Priority;
@@ -147,7 +146,7 @@ namespace Organizer.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProjectCreate([Bind(Include = "Title,Priority,Text,Performer,Customer")] Project project)
+        public ActionResult ProjectCreate([Bind(Include = "Title,Priority,Text,Performer,Customer,CreatedAt,CompletedAt")] Project project)
         {
             _projectService.NewProject(project);
             return View("");
@@ -156,6 +155,12 @@ namespace Organizer.MVC.Controllers
         public ActionResult DeleteProjectUser(Guid idProject, Guid idUser)
         {
             _projectService.DeleteUserFromProjects(idProject, idUser);
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult AddProjectPM(Guid idProject, Guid idPm)
+        {
+            _projectService.AddProjectManager(idProject, idPm);
             return Redirect(Request.UrlReferrer.ToString());
         }
 

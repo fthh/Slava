@@ -33,6 +33,15 @@
         @Html.Hidden("projectId", "")
         <input type="text" name="referal" placeholder="" value="" class="who" autocomplete="off">
         <a href="#" id="pickAnother" style="display: none;">Change</a>
+        @Html.Hidden("userId", user.Id)
+        <a href="#" onclick="return theFunction();">Add</a>
+        <script type="text/javascript">
+                function theFunction() {
+                    var p_id = document.getElementById("projectId").value;
+                    var u_id = document.getElementById("userId").value;
+                    document.location.href = "/Home/AddProjectUser/?idProject=" + p_id + "&idUser=" + u_id;
+                }
+        </script>
         <ul class="search_result"></ul>
         @{
             foreach (var project in user.Projects)
@@ -46,5 +55,5 @@
     <div class="col-md-2"></div>
 </div>
 @section Scripts {
-    @Scripts.Render("~/bundles/autoUser")
+    @Scripts.Render("~/bundles/autoProject")
 }
