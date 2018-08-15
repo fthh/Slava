@@ -15,6 +15,6 @@ namespace BLL.Interfaces
         void DeleteProject(Guid id);
         Project GetProjectById(Guid id);
         void DeleteUserFromProjects(Guid idProject, Guid idUser);
-        void AddUserToProject(Project project, User user);
+        void AddUserToProject(Guid project, Guid user);
     }
 }

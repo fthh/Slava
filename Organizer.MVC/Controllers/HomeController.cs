@@ -161,9 +161,7 @@ namespace Organizer.MVC.Controllers
 
         public ActionResult AddProjectUser(Guid idProject, Guid idUser)
         {
-            var user = _userService.GetById(idUser);
-            var project = _projectService.GetById(idProject);
-            _projectService.AddUserToProject(project, user);
+            _projectService.AddUserToProject(idProject, idUser);
             return Redirect(Request.UrlReferrer.ToString());
         }
 

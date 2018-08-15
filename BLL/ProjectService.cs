@@ -37,10 +37,14 @@ namespace BLL
             _unitOfWork.Commit();
         }
 
-        public void AddUserToProject(Project project, User user)
+        public void AddUserToProject(Guid projectId, Guid userId)
         {
+            var projectRepository = _unitOfWork.GetRepository<Project>();
+            var userRepository = _unitOfWork.GetRepository<User>();
+            var project = projectRepository.GetById(projectId);
+            var user = userRepository.GetById(userId);
             project.Workers.Add(user);
-            user.Projects.Add(project);
+            projectRepository.Update(project);
             _unitOfWork.Commit();
         }
 
