@@ -10,25 +10,15 @@ namespace Organizer.MVC
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureApp(app); // слава - шляпа
+            ConfigureApp(app);
             ConfigureAuth(app);
         }
 
         private void ConfigureApp(IAppBuilder app)
         {
-
             var configuration = new HttpConfiguration();
-
-            //web api
-            //configuration.MapHttpAttributeRoutes();
-
-            //ConfigureDI(configuration);
             var container = ConfigureDI(configuration);
-
             app.UseAutofacMiddleware(container);
-            //app.UseAutofacWebApi(configuration);
-            //app.UseWebApi(configuration);
-
             app.UseAutofacMvc();
         }
     }

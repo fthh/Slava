@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
 using DAL.Interfaces;
-using Autofac;
-using DAL.Entities;
+using DTO;
 using BLL.Interfaces;
 
 namespace BLL
@@ -22,12 +20,22 @@ namespace BLL
 
         public void DeleteUser(User entity)
         {
+            var projectRepository = _unitOfWork.GetRepository<Project>();
+            var projects = _unitOfWork.GetRepository<Project>().GetAll();
+            foreach(var project in projects)
+            {
+                if (project.ProjectManager.Id == entity.Id)
+                {
+                    project.ProjectManager = null;
+                    projectRepository.Update(project);
+                }
+            }
             base.Delete(entity);
         }
 
         public void DeleteUser(Guid id)
         {
-            base.Delete(id);
+            DeleteUser(base.GetById(id));
         }
 
         public User GetPostById(Guid id)

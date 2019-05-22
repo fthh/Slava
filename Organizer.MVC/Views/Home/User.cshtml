@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var user = (DTO.User)ViewData["user"];
+}
+
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+        <a class="btn btn-default" href="@Html.Raw("/Home/UserEdit/?id=" + user.Id)">Edit</a>
+        <a class="btn btn-default" href="@Html.Raw("/Home/UserDelete/?id=" + user.Id)">Delete</a>
+        <h2>User:</h2>
+        <p>
+            First name:
+            @Html.Raw(user.FirstName)
+        </p>
+        <p>
+            Last name:
+            @Html.Raw(user.LastName)
+        </p>
+        <p>
+            Middle name:
+            @Html.Raw(user.MiddleName)
+        </p>
+        <p>
+            Email:
+            @Html.Raw(user.Email)
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Projects:</h2>
+        @{
+            foreach (var project in user.Projects)
+            {
+                var link = "/Home/Project/?id=" + project.Id;
+                <p><a class="btn btn-default" href="@link">@project.Title</a></p>
+                //@Html.Raw("<p><a class=\"btn btn-default\" href=\""+link+"\"> " + project.Title + "</p>")
+            }
+        }
+    </div>
+    <div class="col-md-2"></div>
+</div>

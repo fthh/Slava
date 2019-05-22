@@ -16,10 +16,8 @@ namespace Organizer.MVC
             builder.RegisterModule(new ServiceModule());
 
             var container = builder.Build();
-            //ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-            //configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             return container;
         }
     }
